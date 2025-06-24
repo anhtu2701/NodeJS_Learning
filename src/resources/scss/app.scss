@@ -1,2 +1,13 @@
 @import "variables";
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: $red-color;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
