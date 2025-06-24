@@ -1,9 +1,10 @@
 {
   "name": "nodejs_learning",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "./src/server.js",
   "scripts": {
-    "start": "nodemon --inspect src/server.js",
+    "start": "nodemon --inspect ./src/server.js",
+    "watch": "sass --watch ./src/resources/scss:./src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "sass": "^1.89.2"
   }
 }
