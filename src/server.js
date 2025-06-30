@@ -8,8 +8,14 @@ const port = 3001;
 // Static Files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware
+app.use(express.urlencoded({
+    extended: true // Parse URL-encoded bodies with the querystring library
+})); // Parse URL-encoded bodies
+app.use(express.json()); // Parse JSON bodies
+
 // HTTP Logger
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 // Template Engine
 app.engine('hbs', handlebars.engine({
@@ -29,6 +35,12 @@ app.get('/news', (req, res) => {
 
 app.get('/search', (req, res) => {
     res.render('search');
+});
+
+app.post('/search', (req, res) => {
+
+    console.log(req.body.q);
+    res.send('');
 });
 
 app.listen(port, () => {
