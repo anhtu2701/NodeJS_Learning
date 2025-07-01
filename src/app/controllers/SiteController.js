@@ -1,8 +1,16 @@
+NguoiDung = require('../models/NguoiDung');
+
 class SiteController {
 
     //  [GET] /
-    home(req, res) {
-        res.render('/');
+    async home(req, res) {
+        // res.render('home');
+        try {
+            const users = await NguoiDung.getAll();
+            res.render('home', { users })
+        } catch (error) {
+            res.status(500).send('Có lỗi khi lấy dữ liệu người dùng!');
+        }
     }
     //  [GET] /search
     search(req, res) {

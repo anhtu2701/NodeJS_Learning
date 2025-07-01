@@ -5,29 +5,40 @@ const path = require('path');
 const app = express();
 const port = 3001;
 const route = require('./routes');
+const db = require('./config/db');
 
-// Static Files
-app.use(express.static(path.join(__dirname, 'public')));
+// Tạo hàm khởi động server
+async function startServer() {
+    // Kết nối database trước khi start Express
+    await db.connect();
 
-// Middleware
-app.use(express.urlencoded({
-    extended: true // Parse URL-encoded bodies with the querystring library
-})); // Parse URL-encoded bodies
-app.use(express.json()); // Parse JSON bodies
+    // Static Files
+    app.use(express.static(path.join(__dirname, 'public')));
 
-// HTTP Logger
-// app.use(morgan('combined'));
+    // Middleware
+    app.use(express.urlencoded({
+        extended: true
+    }));
+    app.use(express.json());
 
-// Template Engine
-app.engine('hbs', handlebars.engine({
-    extname: '.hbs'
-}));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources', 'views'));
+    // HTTP Logger
+    app.use(morgan('combined'));
 
-//  Routes init
-route(app);
+    // Template Engine
+    app.engine('hbs', handlebars.engine({
+        extname: '.hbs'
+    }));
+    app.set('view engine', 'hbs');
+    app.set('views', path.join(__dirname, 'resources', 'views'));
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-}) 
+    // Routes init
+    route(app);
+
+    // Start server sau khi DB đã kết nối thành công
+    app.listen(port, () => {
+        console.log(`Example app listening at http://localhost:${port}`);
+    });
+}
+
+// Gọi hàm startServer()
+startServer();

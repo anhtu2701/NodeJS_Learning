@@ -1,1 +1,25 @@
-<h1>HOME PAGE</h1>
+<h1>Danh sách Người dùng</h1>
+<table class="table" border="1" cellpadding="6">
+    <tr>
+        <th scope="col">Mã Người Dùng</th>
+        <th scope="col">CCCD</th>
+        <th scope="col">Tên đăng nhập</th>
+        <th scope="col">Họ tên</th>
+        <th scope="col">Email</th>
+        <th scope="col">SĐT</th>
+        <th scope="col">Vai trò</th>
+        <th scope="col">Trạng thái</th>
+    </tr>
+    {{#each users}}
+        <tr>
+            <td>{{MaNguoiDung}}</td>
+            <td>{{CCCD}}</td>
+            <td>{{TenDangNhap}}</td>
+            <td>{{HoTen}}</td>
+            <td>{{Email}}</td>
+            <td>{{SoDienThoai}}</td>
+            <td>{{VaiTro}}</td>
+            <td>{{TrangThai}}</td>
+        </tr>
+    {{/each}}
+</table>
